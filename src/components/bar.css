@@ -18,13 +18,14 @@ ul {
   flex: 1;
   list-style: none;
   text-align: center;
+  
 }
 ul li {
   display: inline-block;
   margin: 10px 20px;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  
+ 
 }
 
 .toggle-icon {
@@ -69,4 +70,11 @@ ul li {
 }
 .dark .search-box input::placeholder {
   background-color: #222;
+}
+
+
+/* Apply the hover effect */
+.underlinee:hover {
+  /* Color of the underline on hover */
+  color: rgb(205, 127, 50)      
 }

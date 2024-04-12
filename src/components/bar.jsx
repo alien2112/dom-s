@@ -6,6 +6,7 @@ import search_icon_dark from "../assets/search-b.png";
 import toggle_light from "../assets/night.png";
 import toggle_dark from "../assets/day.png";
 import { NavLink } from "react-router-dom";
+import BarItem from "./barItem";
 function Bar({ theme, setTheme }) {
   function toggle_theme() {
     theme == "light" ? setTheme("dark") : setTheme("light");
@@ -19,19 +20,11 @@ function Bar({ theme, setTheme }) {
           alt=""
           className="logo "
         />
-        <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/cart">Cart</NavLink>
-          </li>
-          <li>
-            <NavLink to="/menu">Menu</NavLink>
-          </li>
-          <li>
-            <NavLink to="/account">Account</NavLink>
-          </li>
+        <ul >
+        <BarItem name="Home" to="/" />
+  <BarItem name="Menu" to="/menu" />
+  <BarItem name="Cart" to="/cart" />
+  <BarItem name="Account" to="/account" />
         </ul>
         <div className="search-box">
           <input type="text" placeholder="search" />
