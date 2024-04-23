@@ -6,12 +6,15 @@
   background: #fcffde;
   padding: 1px 5%;
   transition: 0.5;
+  position: sticky;
+  
   
 }
 
 .logo {
   width: 160;
   cursor: pointer;
+  margin-left: -35px;
   
 }
 ul {

@@ -15,8 +15,8 @@ const BarItem = ({ name, to }) => {
         {name}
       </NavLink>
       <div 
-        className={`absolute inset-x-0 bottom-0 border-b-4 ${isHovered ? 'border-amber-600' : 'border-transparent'}`}
-        style={{ transition: 'border-color 0.4s' }}
+        className={`absolute  bottom-0 border-b-4 ${isHovered ? 'border-amber-600' : 'border-transparent'} inset-x-0`}
+        style={{ transition: 'border-color 0.5s' }}
       ></div>
     </li>
   );

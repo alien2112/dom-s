@@ -1,10 +1,14 @@
 import React from 'react'
 import Form from '../components/Form'
-const Account = () => {
-  
-   var signedin = false;
+import Admin from './admin';
+import { useState } from 'react';
+const Account = ({theme}) => {
+
+   var signedin = true;
+   var admin  = true;
     return (
-    !signedin && <Form></Form>
+    signedin? admin? <Admin/>:<User/> : <Form theme={theme}></Form>
+   
   )
 }
 export default Account;

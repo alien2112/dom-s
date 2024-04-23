@@ -1,5 +1,7 @@
 import React from 'react'
 import ImageSlider from '../components/imageSlider'
+import Explore from './Explore';
+import CartDrawer from '../components/Cartdrawer';
 function Home() {
 const slides =[
   {url:'src/assets/1.jpg',title:'vegan'},
@@ -16,8 +18,13 @@ const conatinerStyle = {
 
   return <div className='min-h-screen'>
   <div  style={conatinerStyle}>
-    <ImageSlider slides={slides}></ImageSlider>
+    <ImageSlider id='first' slides={slides}></ImageSlider>
+   
 </div>
+<div className='mt-5 mb-2'>
+  <Explore/>
+ 
+  </div>
 
   </div>
 }

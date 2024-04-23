@@ -7,6 +7,9 @@ import About from "./pages/about";
 import Account from "./pages/account";
 import Cart from "./pages/cart";
 import Contact from "./pages/contact";
+import NotFound from "./pages/NotFound";
+import ItemPage from "./pages/ItemPage"
+import CartDrawer from "./components/Cartdrawer";
 import {CartContextProvider} from './context/cart-context'
 
 
@@ -31,16 +34,18 @@ function App() {
       <Router>
         <Bar className="navbar" theme={theme} setTheme={setTheme} />
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/account" element={<Account/>}/>
+          <Route exact path="/" element={<Home/>}/>
+          <Route path="/account" element={<Account theme={theme}/>}/>
           <Route path="/about" element={<About/>} />
           <Route path="/menu" element={<Menu/>} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="/contact" element={<Contact/>} />
+          <Route path="/item/:id" element={<ItemPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </Router>
-     
+   
     </div>
     </CartContextProvider>
   );
