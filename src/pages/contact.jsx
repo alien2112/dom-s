@@ -6,23 +6,22 @@ const Contact = () => {
       <div className="max-w-md mx-auto mt-8 p-4 bg-white shadow-lg rounded-lg border-b-4 border-gray-300">
         <div className='text-center'>
           <h1>connect</h1>
-<h2 class='text-3xl'>need help? <span className='text-red-600'>contact us</span> 
+<h2 className='text-3xl'>need help? <span className='text-red-600'>contact us</span> 
 </h2>
         </div>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8">
-      {/* Call Us */}
+      
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Call Us</h2>
         <p className="text-lg">Phone: <a href="tel:5214448" className="text-blue-500 hover:underline">5214448</a></p>
       </div>
 
-      {/* Address */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Address</h2>
         <p className="text-lg">166 Geish Road, Cleopatra, Sedi Gaber, Egypt</p>
       </div>
 
-      {/* Opening Hours */}
+
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Opening Hours</h2>
         <p className="text-lg">Monday to Sunday: 8:00 AM - 11:00 PM</p>

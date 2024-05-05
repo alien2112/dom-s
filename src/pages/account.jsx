@@ -2,12 +2,14 @@ import React from 'react'
 import Form from '../components/Form'
 import Admin from './admin';
 import { useState } from 'react';
-const Account = ({theme}) => {
+import Profile from './Profile';
+const Account = ({theme,setTheme}) => {
+
+
 
    var signedin = true;
-   var admin  = true;
     return (
-    signedin? admin? <Admin/>:<User/> : <Form theme={theme}></Form>
+    signedin? <Profile user={user} theme={theme} setTheme={setTheme} /> : <Form theme={theme}></Form>
    
   )
 }

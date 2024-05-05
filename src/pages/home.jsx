@@ -1,7 +1,6 @@
 import React from 'react'
 import ImageSlider from '../components/imageSlider'
 import Explore from './Explore';
-import CartDrawer from '../components/Cartdrawer';
 function Home() {
 const slides =[
   {url:'src/assets/1.jpg',title:'vegan'},

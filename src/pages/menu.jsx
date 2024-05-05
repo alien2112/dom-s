@@ -1,58 +1,50 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { CartContext } from "../context/cart-context";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; // Import motion from Framer Motion
+import { CartContext } from "../context/cart-context";
+import axios from "axios";
+
 function Menu() {
   const [items, setItems] = useState([]);
-  const { addToCart, removeFromCart, clearItem, clearCart, cartItems, setMenuItems, menuItems,getCount} = useContext(CartContext);
+  const { addToCart, removeFromCart, clearItem, clearCart, cartItems, setMenuItems, menuItems, getCount } = useContext(CartContext);
 
   useEffect(() => {
-    console.log(getCount())
-    setItems(menuItems);
-    
+    console.log(getCount());
+    setItems(JSON.parse(localStorage.getItem("current_menu")));
   }, [menuItems]);
 
-  if(!(menuItems.length>0)){ 
-
-  setMenuItems(JSON.parse(localStorage.getItem("current_menu")));
-
-
+  if (!(menuItems.length > 0)) {
+    setMenuItems(JSON.parse(localStorage.getItem("current_menu")));
   }
+
   return (
-    <div id='menu' className="w-full mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+    <div id='menu' className="w-full mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-10 gap-x-10 mt-10 mb-5">
       {items.length > 0 ? (
         items.map((item, index) => (
-          <div key={index} className="w-80 h-160 bg-white shadow-md rounded-xl overflow-hidden relative ">
-              <Link key={item.id} to={`/item/${item.id}`}>
-              <div className="w-50 h-30 flex items-center justify-center overflow-hidden border border-gray-200 shadow-md mr-4"> 
+          <motion.div
+            key={index}
+            className="w-full bg-white shadow-md rounded-xl overflow-hidden relative"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <Link key={item.id} to={`/item/${item.id}`} className="block">
+              <div className="w-full h-56 overflow-hidden">
                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
               </div>
-            </Link>
-            <div className="px-4 py-3">
-              <h5 className="text-3xl my-3 truncate">{item.title}</h5>
-              <p className="text-sm text-gray-600 h-20 overflow-y-hidden mb-10">{item.description}</p>
-            </div>
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center"> {/* Position buttons at the bottom */}
-              {cartItems[item.id] === undefined || cartItems[item.id] === 0 ? (
-                <button onClick={() => addToCart(item)} className="p-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                  Add To Cart
-                </button>
-              ) : (
-                <>
-                  <button onClick={() => removeFromCart(item)} className="bg-red-500 text-white px-2 py-1 rounded-md mr-2">
-                    - {}
+              </Link>
+              <div className="px-4 py-3">
+                <h5 className="text-xl font-semibold mb-2 truncate">{item.title}</h5>
+                <p className="text-sm text-gray-600 overflow-hidden line-clamp-2" style={{ maxHeight: "2.5rem" }}>{item.description}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-semibold">${item.price}</span>
+                  <button onClick={() => addToCart(item)} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                    Add To Cart
                   </button>
-                  <span className="font-semibold">{cartItems[item.id]}</span>
-                  <button onClick={() => addToCart(item)} className="bg-green-500 text-white px-2 py-1 rounded-md ml-2">
-                    +
-                  </button>
-                  <button onClick={() => clearItem(item)} className="bg-gray-500 text-white px-2 py-2 rounded-md mt">
-                    Remove
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
+                </div>
+              </div>
+           
+          </motion.div>
         ))
       ) : (
         <div>Loading...</div>

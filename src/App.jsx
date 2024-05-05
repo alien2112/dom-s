@@ -9,7 +9,6 @@ import Cart from "./pages/cart";
 import Contact from "./pages/contact";
 import NotFound from "./pages/NotFound";
 import ItemPage from "./pages/ItemPage"
-import CartDrawer from "./components/Cartdrawer";
 import {CartContextProvider} from './context/cart-context'
 
 
@@ -35,7 +34,7 @@ function App() {
         <Bar className="navbar" theme={theme} setTheme={setTheme} />
         <Routes>
           <Route exact path="/" element={<Home/>}/>
-          <Route path="/account" element={<Account theme={theme}/>}/>
+          <Route path="/account" element={<Account theme={theme} setTheme={setTheme}/>}/>
           <Route path="/about" element={<About/>} />
           <Route path="/menu" element={<Menu/>} />
           <Route path="/cart" element={<Cart/>} />

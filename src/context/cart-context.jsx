@@ -1,6 +1,5 @@
         import { menu } from "@material-tailwind/react";
 import { createContext, useEffect, useState } from "react";
-import CartDrawer from "../components/Cartdrawer";
         const CartContext = createContext({});
 
 
@@ -8,7 +7,6 @@ import CartDrawer from "../components/Cartdrawer";
 
         const CartContextProvider = (props) => {
             const [menuItems,setMenuItems] = useState({});
-            const [isOpen, setIsOpen] = useState(true)
             const getDefaultCart = ()=>{
                 let cart = {};
                 for (let i = 1 ; i<21;i++){
@@ -54,9 +52,6 @@ import CartDrawer from "../components/Cartdrawer";
 
 
             }
-            const openCart = () => setIsOpen(true)
-            const closeCart = () => setIsOpen(false)
- 
             function getCount(){
                 var count=0
                 for(let x in cartItems){
@@ -65,7 +60,7 @@ import CartDrawer from "../components/Cartdrawer";
                 return count
             }
             
-        const contextValue = {openCart,closeCart,cartItems,addToCart,removeFromCart,clearCart,setMenuItems,menuItems,findproductbyId,clearItem,setCartItems,getCount}
+        const contextValue = {cartItems,addToCart,removeFromCart,clearCart,setMenuItems,menuItems,findproductbyId,clearItem,setCartItems,getCount}
         //console.log(cartItems)
             return (
             <CartContext.Provider value={contextValue}>

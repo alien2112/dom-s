@@ -7,15 +7,17 @@ const Admin = () => {
     const { setMenuItems, menuItems } = useContext(CartContext);
     const [users, setUsers] = useState(fakeUsers);
     const [orders, setOrders] = useState(fakeOrders);
-    const [newUser, setNewUser] = useState({ username: '', email: '', role: 'user' });
+    const [newUser, setNewUser] = useState({ username: '', email: '', role: '' });
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [ordersTodayCount, setOrdersTodayCount] = useState(0); // State to hold count of orders today
 
     const handleAddUser = () => {
-        if (newUser.username && newUser.email) {
+        if (newUser.username && newUser.email &&newUser.role) {
             setUsers([...users, newUser]);
-            setNewUser({ username: '', email: '', role: 'user' });
+            setNewUser({ username: '', email: '', role: '' });
+            
         } else {
             alert('Please enter username and email');
         }
@@ -44,9 +46,16 @@ const Admin = () => {
     };
 
     useEffect(() => {
-        localStorage.setItem("current_menu", JSON.stringify(menuItems));
-    }, [menuItems]);
+        if (JSON.parse(localStorage.getItem("current_menu")).length < menuItems.length) {
+            localStorage.setItem("current_menu", JSON.stringify(menuItems));
+        }
+        setMenuItems(JSON.parse(localStorage.getItem("current_menu")));
 
+        // Calculate count of orders today
+        const today = new Date().toLocaleDateString();
+        const ordersToday = orders.filter(order => new Date(order.date).toLocaleDateString() === today);
+        setOrdersTodayCount(ordersToday.length);
+    }, [menuItems, orders]);
     return (
         <div className="container mx-auto p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -60,14 +69,21 @@ const Admin = () => {
                                 placeholder="Username"
                                 value={newUser.username}
                                 onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
-                                className="p-2 border border-gray-300 rounded-md mr-2"
+                                className="border border-gray-300 rounded-md mr-2"
                             />
                             <input
                                 type="email"
                                 placeholder="Email"
                                 value={newUser.email}
                                 onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                                className="p-2 border border-gray-300 rounded-md mr-2"
+                                className="border border-gray-300 rounded-md mr-2"
+                            />
+                            <input
+                                type="role"
+                                placeholder="role"
+                                value={newUser.role}
+                                onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                                className="border border-gray-300 rounded-md mr-2"
                             />
                             <button onClick={handleAddUser} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add User</button>
                         </div>
@@ -89,6 +105,7 @@ const Admin = () => {
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
                     <h2 className="text-lg font-semibold mb-2">Orders</h2>
+                    <p className="text-sm mb-4">Orders Today: {ordersTodayCount}</p>
                     <div>
                         {orders.map(order => (
                             <div key={order.id} className="bg-gray-200 p-3 rounded-md mb-2">
