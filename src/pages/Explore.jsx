@@ -8,7 +8,7 @@ const Explore = () => {
 
     useEffect(() => {
         axios
-          .get("https://fakestoreapi.com/products")
+          .get("http://localhost:5000/api/v1/products/find")
           .then((res) => {
             setMenuItems(res.data);
             console.log(res.data)
@@ -19,12 +19,7 @@ const Explore = () => {
       }, []);
 
 
-      useEffect(() => {
-        
-      if(JSON.parse(localStorage.getItem("current_menu")).length<menuItems.length){
-        localStorage.setItem("current_menu", JSON.stringify(menuItems));
-      }
-      }, [menuItems]);
+
 
     return (
         <div className="p-4">

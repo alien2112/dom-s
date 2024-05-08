@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../context/cart-context";
 
 export const CartItem = ({ product, quantity }) => {
-  const { addToCart, removeFromCart, clearItem, clearCart, cartItems, addMenuItems } = useContext(CartContext);
+  
   const totalPrice = (parseFloat(product.price) * quantity).toFixed(2);
 
   return (

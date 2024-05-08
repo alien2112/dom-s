@@ -68,7 +68,7 @@ function Bar({ theme, setTheme }) {
               }}
            
            >
-              {getCount()}
+              {getCount}
             </div>
           </Button>
 

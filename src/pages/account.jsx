@@ -1,16 +1,21 @@
 import React from 'react'
 import Form from '../components/Form'
 import Admin from './admin';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Profile from './Profile';
+import axios from "axios"; 
 const Account = ({theme,setTheme}) => {
+const [isSignedIn,setIsSignedIn] = useState(false)
+const [user,setUser] = useState()
 
 
 
-   var signedin = true;
+
+
     return (
-    signedin? <Profile user={user} theme={theme} setTheme={setTheme} /> : <Form theme={theme}></Form>
+      isSignedIn? <Profile setIsSignedIn={setIsSignedIn} user={user} theme={theme} setTheme={setTheme} /> : <Form user={user} setUser={setUser}setIsSignedIn={setIsSignedIn} theme={theme}></Form>
    
   )
 }
 export default Account;
+

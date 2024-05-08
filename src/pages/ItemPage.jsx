@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { CartContext } from '../context/cart-context';
+import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -8,41 +8,35 @@ const ItemPage = () => {
     const { id } = useParams();
     const [item, setItem] = useState(null);
     const [randomItems, setRandomItems] = useState([]);
-    const { findproductbyId, addToCart } = useContext(CartContext);
 
     useEffect(() => {
-        const product = findproductbyId(id);
-        setItem(product);
-
-        const fetchRandomItems = () => {
-            const totalProducts = 20; // Assuming you have 19 products in total
-            const excludedIds = [id]; // Exclude the main item
-            const randomItems = [];
-
-            for (let i = 0; i < 3; i++) {
-                let randomProductId;
-                do {
-                    randomProductId = Math.floor(Math.random() * totalProducts) + 1; // Add 1 to avoid generating ID 0
-                    if(randomProductId==id){
-                        randomProductId++;
-                    }
-                } while (excludedIds.includes(randomProductId));
-
-                const randomProduct = findproductbyId(randomProductId);
-                if (randomProduct) {
-                    randomItems.push(randomProduct);
-                    excludedIds.push(randomProductId);
-                }
+        const fetchProduct = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/v1/products/find/${id}`);
+                setItem(response.data);
+            } catch (error) {
+                console.error('Error fetching product:', error);
             }
-            
-            setRandomItems(randomItems);
+        };
+
+        fetchProduct();
+    }, [id]);
+
+    useEffect(() => {
+        const fetchRandomItems = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/v1/products/find/random`);
+                setRandomItems(response.data);
+            } catch (error) {
+                console.error('Error fetching random items:', error);
+            }
         };
 
         fetchRandomItems();
-    }, [id, findproductbyId]);
+    }, []);
 
     const handleAddToCart = () => {
-        addToCart(item);
+        // Your addToCart logic goes here
         toast.success('Item has been added to the cart');
     };
 

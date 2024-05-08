@@ -7,6 +7,7 @@ import { createContext, useEffect, useState } from "react";
 
         const CartContextProvider = (props) => {
             const [menuItems,setMenuItems] = useState({});
+            const [getCount,setGetCount] = useState(0);
             const getDefaultCart = ()=>{
                 let cart = {};
                 for (let i = 1 ; i<21;i++){
@@ -52,15 +53,9 @@ import { createContext, useEffect, useState } from "react";
 
 
             }
-            function getCount(){
-                var count=0
-                for(let x in cartItems){
-                    count +=cartItems[x]
-                }
-                return count
-            }
+
             
-        const contextValue = {cartItems,addToCart,removeFromCart,clearCart,setMenuItems,menuItems,findproductbyId,clearItem,setCartItems,getCount}
+        const contextValue = {cartItems,addToCart,removeFromCart,clearCart,setMenuItems,menuItems,findproductbyId,clearItem,setCartItems,setGetCount,getCount}
         //console.log(cartItems)
             return (
             <CartContext.Provider value={contextValue}>
